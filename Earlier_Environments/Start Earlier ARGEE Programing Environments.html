@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html manifest="/cache.manifest">
+<head>
+
+
+<noscript><center><h1>Your browser does not support JavaScript!</h1></center></noscript>
+<script type="text/javascript">
+
+var env_links=
+[
+   {name:"2.0.28.5",link:"./2_0_28_5/Start ARGEE Programming Environment.html?env=2.0.28.5&"},
+   {name:"Latest - ARGEE3",link:"../Start ARGEE Programming Environment.html"},
+];
+   
+function launch()
+{
+   var sel_env=this.document.getElementById("env_sel");
+   var jk=1;
+   window.location=env_links[sel_env.selectedIndex].link;
+}
+
+function displayRedir()
+{
+   var disp_div=this.document.getElementById("redir_div");
+   var i;
+   var outp="<center><h2> Select The Environment version to use </h2><select style='font-size: 22px;' id=\"env_sel\">";
+   for(i=0;i<env_links.length;i++)
+   {
+      outp+="<option>"+env_links[i].name+"</option>";
+   }
+   outp+="</select><br><br><button style='font-size: 22px;' onclick=\"launch();\">Launch</button></center>";
+   disp_div.innerHTML=outp;
+}
+</script>
+ 
+</head><body onload="displayRedir()">
+<div id="redir_div"></div>
+</body>
+</html>

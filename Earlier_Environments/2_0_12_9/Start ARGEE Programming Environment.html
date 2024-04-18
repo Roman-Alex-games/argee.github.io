@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html manifest="/cache.manifest">
+<head>
+
+
+<!--
+/********************************************************************************
+ *
+ * Copyright (c) 2013 by TUSA
+ *
+ ********************************************************************************
+ *
+ *  Author    : Roman Glistvain
+ *
+ *
+ ********************************************************************************
+ *
+ *  DESCRIPTION: Programmable Environment ARGEE
+ *
+ *******************************************************************************/
+-->
+
+<!--<meta content='True' name='HandheldFriendly' />
+<meta content='width=device-width; initial-scale=0.75; maximum-scale=1.0; user-scalable=0;' name='viewport' />
+<meta name="viewport" content="width=device-width" />
+-->
+<meta name="HandheldFriendly" content="True">
+<!--<meta name="MobileOptimized" content="320">
+-->
+<!--
+<meta name="viewport" content="width=device-width; initial-scale=.75; maximum-scale=.75; minimum-scale=.75; user-scalable=0;" />
+-->
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=0;" />
+
+
+
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>ARGEE Program</title>
+
+<script src="Date.js" type="text/javascript"></script>
+<script src="Stack.js" type="text/javascript"></script>
+<script src="Tokanizer.js" type="text/javascript"></script>
+<script src="Evaluator.js" type="text/javascript"></script>
+<script src="flowchart.js" type="text/javascript"></script>
+<script src="argee_library_loader.js" type="text/javascript"></script>
+<script src="BLC_modules.js" type="text/javascript"></script>
+<script src="TBEN_modules.js" type="text/javascript"></script>
+<script src="TBEN_S1_modules.js" type="text/javascript"></script>
+<script src="FEN20_modules.js" type="text/javascript"></script>
+<script src="util.js" type="text/javascript"></script>
+<script src="argee_ajax.js" type="text/javascript"></script>
+<script src="argee_compiler.js" type="text/javascript"></script>
+<script src="argee_print.js" type="text/javascript"></script>
+<script src="argee_env.js" type="text/javascript"></script>
+<script src="argee_sim.js" type="text/javascript"></script>
+<script src="argee_trace.js" type="text/javascript"></script>
+
+
+
+ 
+<style>
+  .rotate {
+    -moz-transform: rotate(90deg);
+  }
+  .resize {
+    -moz-transform: scale(0.7);
+  }
+  
+  body { font-size: 75%; }
+
+ 
+  button 
+  {
+		color:black; font:12px sans-serif; -webkit-border-radius: 8px; padding:0.2em 10px;    -moz-border-radius: 8px;    border-radius: 8px;background: #E7E7E7 -webkit-gradient( linear, 0% 0%, 0% 100%, from(rgba(255,255,255,.4)),to(rgba(0,0,0,0)));background: #E7E7E7 -moz-linear-gradient( top, rgba(255,255,255,.4), rgba(0,0,0,0));} button:hover {background: #FFFAFA -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,.55)), to(rgba(0,0,0,0)));background: #FFFAFA -moz-linear-gradient( top, rgba(255,255,255,.55), rgba(0,0,0,0));
+  }
+  
+.page {
+    width: 21cm;
+    margin: 5cm 5cm 5cm 5cm;
+    border: 1px #D3D3D3 solid;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+
+  
+  .but_select {
+    -moz-appearance:none;
+    -webkit-appearance:none;
+	 padding:0;
+    color:black; font:12px sans-serif; -webkit-border-radius: 8px;     -moz-border-radius: 8px;    border-radius: 8px;background: #E7E7E7 -webkit-gradient( linear, 0% 0%, 0% 100%, from(rgba(255,255,255,.4)),to(rgba(0,0,0,0)));background: #E7E7E7 -moz-linear-gradient( top, rgba(255,255,255,.4), rgba(0,0,0,0));} button:hover {background: #FFFAFA -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(255,255,255,.55)), to(rgba(0CSS relative positioning,0,0,0)));background: #FFFAFA -moz-linear-gradient( top, rgba(255,255,255,.55), rgba(0,0,0,0));
+}
+  
+  
+  
+  .larger_button1 {font-size:16px;  margine:auto; width:100%; height:100%; padding:0px;
+  -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+
+   /*
+     Introduced in IE 10.
+     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+   */
+   -ms-user-select: none;
+   user-select: none;
+  }
+  .larger_button0 {font-size:16px; width:33%;  padding:0.1em }
+  
+  select optgroup{color:black;font-style:normal;font-weight:bold;background-color:FFFF66;}
+  
+  .box-shadow2 {    background-color:green;    border: 1 px solid ;    padding:5px;    text-align: center;    width:10em;    box-shadow:10px 10px 20px #000;    -webkit-box-shadow:5px 5px 10px #000;    -moz-box-shadow: 10px 10px 20px #000;        -moz-border-radius: 8px;    border-radius: 8px;    -webkit-border-radius: 8px;}
+  
+  input[type="text"], textarea{     width:12em;     border-radius:2px;     border: solid 1px #ccc;     padding:0.1em;     background-color: #f5f5f5;     box-shadow: inset 0 2px 3px rgba(0,0,0,0.2); }
+  
+  textarea:focus, input:focus {	border: 2px solid #606060 ;}
+  
+  
+  .arrow_box {	position: relative;	background: green;	border: 1px solid #c2e1f5;}.arrow_box:after, .arrow_box:before {	right: 100%;	border: solid transparent;	content: " ";	height: 0;	width: 0;	position: absolute;	pointer-events: none;}.arrow_box:after {	border-color: rgba(0, 0, 0, 0);	border-right-color: green;	border-width: 10px;	top: 30%;	margin-top: -10px;}.arrow_box:before {	border-color: rgba(0, 0, 0, 0);	border-right-color: green;	border-width: 11px;	top: 30%;	margin-top: -11px;}
+  
+
+#nav_inner 
+{
+	margin-top: 0.3em;
+   display: inline-block;
+}	
+
+#navigation 
+{  
+	margin-top: 0;
+	position: fixed;   
+	top: 0px;  
+	padding:0px;
+	width: 99%;  
+	color: #ffffff;  
+	height: 6em;  
+	text-align: center;    
+	-webkit-box-shadow: 0px 0px 8px 0px #000000;  
+	-moz-box-shadow: 0px 0px 8px 0px #000000;  
+	box-shadow: 0px 0px 8px 0px #000000;  
+	-moz-border-radius: 15px; border-radius: 15px;   
+	background: #8B8B8B;  
+	
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#FFCC00, endColorstr=#FFF78A);  
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFCC00), to(#FFF78A)); 
+	background: -moz-linear-gradient(top,  #FFCC00,  #FFF78A);  color: rgba(1, 1, 1, 0.8);
+}
+
+
+#Overlay
+{
+  visibility: hidden;
+  position: absolute;
+    top: 50%;
+    left: 50%;
+    width:30em;
+    height:20em;
+    margin-top: -12em; /*set to a negative number 1/2 of your height*/
+    margin-left: -15em; /*set to a negative number 1/2 of your width*/	
+  text-align:center;
+  border: solid;
+  background-color: #F0F0F0;
+  z-index: 30;
+}
+
+#grayout {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    visibility: hidden;
+    background-color: #000;
+    filter: alpha(opacity = 55);
+    opacity:.50;
+}
+
+ul#nav_list {    margin-top: 0em;  top:0px;  list-style:none;  padding:0px;  } 
+ul#nav_list li {   top:0px; display:inline} 
+ul#nav_list li p { margin: 0em; display: inline-block; font-size:18px;   text-decoration:none; top:0px;  padding:0px 0.4em 0px 0.4em; color:black;  float:left;  			
+						  text-align:center;  border-left:1px solid red; border-right:1px solid red;} 
+
+ul#nav_list li a { font-size:18px;   text-decoration:none; top:0px;  padding:0px 0.4em 0px 0.4em; color:black;  float:left;  			
+						  text-align:center;  border-left:1px solid red; border-right:1px solid red;} 
+ul#nav_list li a:hover {  background:#a2b3a1;  color:#000}
+  
+  
+  #status_div {    -moz-border-radius: 10px; font-size:10px;    -webkit-border-radius: 10px;    border-radius: 10px; position:fixed; background-color:#FFffff; bottom:0px; border: 1px solid; width:98%; height:4em; padding-left:1em;}
+  
+  
+  select { 
+  -webkit-border-radius: 5px;    -moz-border-radius: 5px;    border-radius: 5px;
+  }  
+  
+  textarea {  border: 1px solid gray;   -webkit-border-radius: 5px;    -moz-border-radius: 5px;    border-radius: 5px;}  
+  fieldset { -moz-border-radius:10px;  border-radius: 10px;  -webkit-border-radius: 10px; }
+  
+</style>
+ 
+ 
+ 
+</head><body onload="testFrame(1)">
+
+<!-- <div id="sup_men"></div><div id="vars_context_menu"></div><div id="cont_menu" style="display: none; "></div><div id="act_menu" class="box-shadow2 arrow_box" style="display: none; "></div><div id="navigation"></div><div id="prog" style="margine:auto; height:100px; padding-top: 5em;	padding-bottom: 5em;"></div><div id="status_div_cont"></div>
+
+<!--<div id="sup_men"></div><div id="vars_context_menu"></div><div id="cont_menu" style="display: none; "></div><div id="act_menu" class="box-shadow2 arrow_box" style="display: none; "></div><div id="navigation"></div><div id="vars" style="position: fixed; top: 5em; bottom: 5em; overflow-y:scroll; "></div><div id="prog" style=" padding-top: 5em; padding-bottom: 5em;  "></div><div id="status_div_cont"></div>  -->
+
+<!--<div id="sup_men"></div><div id="vars_context_menu"></div><div id="cont_menu" style="display: none; "></div><div id="act_menu" class="box-shadow2 arrow_box" style="display: none; "></div><div id="navigation"></div><div id="prog" style=" padding-top: 5em; padding-bottom: 5em;  "></div><div id="status_div_cont"></div> -->
+<div id="grayout"> </div>
+<div id="Overlay">
+  <div>
+   <p id="DlgContent">ARGEE Environment</p>
+   
+  </div>
+</div>
+<div id="sup_men"></div><div id="vars_context_menu"></div><div id="cont_menu" style="display: none; position: fixed; top: 50%; left:45%; "></div><div id="act_menu" class="box-shadow2 arrow_box" style="display: none; "></div><div id="navigation"></div><div id="vars" style="border-right: 2px solid green; position: fixed; top: 6em; bottom:0px; overflow-y:auto; -webkit-overflow-scrolling: touch; "></div><div id="prog" style=" position: fixed; top: 6em; bottom:0px; overflow-y:auto; -webkit-overflow-scrolling: touch;"></div>
+
+</body>
+</html>
